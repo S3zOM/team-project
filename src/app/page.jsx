@@ -1,14 +1,12 @@
-import Header from "../components/Header";
-import Hero from "../components/Hero";
-import Footer from "../components/Footer";
-import JobCard from "../components/JobCard";
-import AboutSection from "../components/AboutSection";
+import Footer from "@/component/Footer";
+import Header from "@/component/Header";
+import Hero from "@/component/Hero";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center">
       <Header />
-      <Hero />
+      <Hero    />
 
       {/* Featured Job Seekers */}
       <section className="mt-16 w-full max-w-4xl">
@@ -18,7 +16,7 @@ export default function Home() {
             name="Person 1"
             title="Frontend Developer"
             description="React, Next.js, Tailwind CSS. 2 years experience. Looking for remote work."
-          />
+          />  
           <JobCard
             name="Person 2"
             title="Accountant"
@@ -33,7 +31,7 @@ export default function Home() {
       </section>
 
       {/* Reused About Section */}
-      <AboutSection />
+      <AboutSection  />
 
       <Footer />
     </main>

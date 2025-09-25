@@ -16,12 +16,16 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+    console.log("GMAIL_USER:", process.env.GMAIL_USER);
+    console.log("GMAIL_PASS:", process.env.GMAIL_PASS);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
 
-    const res = await fetch("/api/contact", {
+    const res = await fetch("/api/contact ", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -54,10 +58,9 @@ export default function ContactPage() {
         {status && (
           <div
             className={`w-full max-w-md mb-4 px-4 py-3 rounded-lg text-center font-semibold shadow-lg
-              ${
-                status.success
-                  ? "bg-green-100 text-green-700 border border-green-300"
-                  : "bg-red-100 text-red-700 border border-red-300"
+              ${status.success
+                ? "bg-green-100 text-green-700 border border-green-300"
+                : "bg-red-100 text-red-700 border border-red-300"
               }`}
             role="alert"
           >
