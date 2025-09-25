@@ -1,14 +1,16 @@
-
-import Header from "../component/Header";
-import Hero from "../component/Hero";
-import Footer from "../component/Footer";
-import JobCard from "../component/JobCard";
+import Header from "../components/Header";
+import Hero from "../components/Hero";
+import Footer from "../components/Footer";
+import JobCard from "../components/JobCard";
+import AboutSection from "../components/AboutSection";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center">
       <Header />
       <Hero />
+
+      {/* Featured Job Seekers */}
       <section className="mt-16 w-full max-w-4xl">
         <h3 className="text-2xl font-bold mb-6 text-gray-700">Featured Job Seekers</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -29,6 +31,10 @@ export default function Home() {
           />
         </div>
       </section>
+
+      {/* Reused About Section */}
+      <AboutSection />
+
       <Footer />
     </main>
   );
