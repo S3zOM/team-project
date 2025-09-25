@@ -12,47 +12,82 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // check if user is logged in
-    const loggedInUser = localStorage.getItem("loggedInUser")
+    const loggedInUser = localStorage.getItem("loggedInUser");
     if (loggedInUser) {
-      setUser({ email: loggedInUser })
+      // Find user details by email
+      const storedUser = localStorage.getItem(`registeredUser-${loggedInUser}`);
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        setUser({ email: parsedUser.email, username: parsedUser.username });
+      } else {
+        setUser({ email: loggedInUser });
+      }
     }
 
     // check if any registered user exists
     const hasUser = Object.keys(localStorage).some((key) =>
       key.startsWith("registeredUser-")
-    )
-    setHasRegisteredUser(hasUser)
-  }, [])
+    );
+    setHasRegisteredUser(hasUser);
+  }, []);
 
   const register = (newUser) => {
+    // Check for existing email
+    if (localStorage.getItem(`registeredUser-${newUser.email}`)) {
+      return { ok: false, message: "An account with this email already exists." };
+    }
+    // Check for existing username
+    for (const key of Object.keys(localStorage)) {
+      if (key.startsWith("registeredUser-")) {
+        const user = JSON.parse(localStorage.getItem(key));
+        if (user.username && user.username.toLowerCase() === newUser.username.toLowerCase()) {
+          return { ok: false, message: "An account with this username already exists." };
+        }
+      }
+    }
     try {
-      // Save user regardless of other users
       localStorage.setItem(
         `registeredUser-${newUser.email}`,
         JSON.stringify(newUser)
-      )
-      setHasRegisteredUser(true)
-      return { ok: true, message: "Registered successfully", user: newUser }
+      );
+      setHasRegisteredUser(true);
+      return { ok: true, message: "Registered successfully", user: newUser };
     } catch (e) {
-      return { ok: false, message: "Registration failed" }
+      return { ok: false, message: "Registration failed" };
     }
-  }
+  };
 
-  const login = ({ email, password }) => {
-    const storedUser = localStorage.getItem(`registeredUser-${email}`)
-    if (!storedUser) {
-      return { ok: false, message: "No account found with this email." }
+  const login = ({ identifier, password }) => {
+    // Try email first
+    let storedUser = localStorage.getItem(`registeredUser-${identifier}`);
+    let parsedUser = storedUser ? JSON.parse(storedUser) : null;
+
+    // If not found by email, try by username
+    if (!parsedUser) {
+      // Search all registered users for a matching username
+      for (const key of Object.keys(localStorage)) {
+        if (key.startsWith("registeredUser-")) {
+          const user = JSON.parse(localStorage.getItem(key));
+          if (user.username && user.username.toLowerCase() === identifier.toLowerCase()) {
+            parsedUser = user;
+            break;
+          }
+        }
+      }
     }
 
-    const parsedUser = JSON.parse(storedUser)
+    if (!parsedUser) {
+      return { ok: false, message: "No account found with this email or username." };
+    }
+
     if (parsedUser.password !== password) {
-      return { ok: false, message: "Incorrect password." }
+      return { ok: false, message: "Incorrect password." };
     }
 
-    localStorage.setItem("loggedInUser", email)
-    setUser({ email })
-    return { ok: true, message: "Login successful", user: parsedUser }
-  }
+    localStorage.setItem("loggedInUser", parsedUser.email);
+    setUser({ email: parsedUser.email, username: parsedUser.username });
+    return { ok: true, message: "Login successful", user: parsedUser };
+  };
 
   const logout = () => {
     localStorage.removeItem("loggedInUser")
