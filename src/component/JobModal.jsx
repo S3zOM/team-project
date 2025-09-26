@@ -29,7 +29,7 @@ export default function JobModal({ job, open, onClose }) {
 
   return (
   <div className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 bg-gradient-to-r from-gray-50 to-blue-50 backdrop-blur-sm">
-      <div className="relative bg-white/80 rounded-2xl shadow-2xl p-10 w-full max-w-xl animate-fadeIn backdrop-blur-xl">
+  <div className="relative bg-white/90 rounded-2xl shadow-2xl p-10 w-full max-w-xl animate-fadeIn backdrop-blur-xl">
         {/* Modern close button */}
         <button
           onClick={onClose}

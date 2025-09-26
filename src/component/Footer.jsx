@@ -3,7 +3,7 @@ import { FaYoutube, FaTwitter, FaInstagram } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="w-full py-10 mt-10 bg-gradient-to-r from-gray-50 to-blue-50 text-gray-900">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+  <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 rounded-2xl bg-white/80 shadow-lg py-8">
         <div>
           <h3 className="font-bold text-lg mb-4">EmployMe</h3>
           <p className="text-sm mb-4">Connecting job seekers and employers worldwide. Find your next opportunity or your next hire here.</p>
