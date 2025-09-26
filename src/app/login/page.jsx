@@ -4,8 +4,6 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "../context/AuthContext"
-import Header from "../../component/Header"
-import Footer from "../../component/Footer"
 
 export default function Login({ onLoginSuccess }) {
   const [identifier, setIdentifier] = useState("")
@@ -39,7 +37,6 @@ export default function Login({ onLoginSuccess }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
       <div className="flex-1 flex items-center justify-center py-12 px-4">
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">Login</h2>
@@ -91,7 +88,6 @@ export default function Login({ onLoginSuccess }) {
           </p>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

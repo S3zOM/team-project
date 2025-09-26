@@ -11,7 +11,7 @@ const categories = [
 
 export default function JobCategories({ selected, onSelect }) {
   return (
-    <section className="w-full max-w-4xl mt-12">
+    <section className="w-full max-w-6xl mt-12">
       <h3 className="text-xl font-bold mb-4 text-gray-700">Browse by Category</h3>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {categories.map((cat) => (

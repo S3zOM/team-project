@@ -28,10 +28,8 @@ export default function JobModal({ job, open, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300">
-      {/* Blurred home page background image */}
-      <div className="absolute inset-0 w-full h-full bg-cover bg-center blur-sm brightness-75" style={{ backgroundImage: 'url(/file.svg)' }}></div>
-      <div className="relative z-10 bg-white/80 rounded-2xl shadow-2xl p-10 w-full max-w-xl animate-fadeIn backdrop-blur-xl">
+  <div className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 bg-gradient-to-r from-gray-50 to-blue-50 backdrop-blur-sm">
+      <div className="relative bg-white/80 rounded-2xl shadow-2xl p-10 w-full max-w-xl animate-fadeIn backdrop-blur-xl">
         {/* Modern close button */}
         <button
           onClick={onClose}

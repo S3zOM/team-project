@@ -98,9 +98,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null)
   }
 
-  if (loading) {
-    return <div className="w-full min-h-screen flex items-center justify-center text-blue-600 text-xl">Loading...</div>;
-  }
+  // Loader removed: app renders immediately
   return (
     <AuthContext.Provider
       value={{ user, hasRegisteredUser, register, login, logout }}>

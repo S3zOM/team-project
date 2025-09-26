@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import ProfileCard from "../../component/ProfileCard";
 import { FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function ProfilePage() {

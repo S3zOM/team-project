@@ -5,8 +5,6 @@
 import { useState } from "react"
 import { useAuth } from "../context/AuthContext"
 import { useRouter } from "next/navigation"
-import Header from "../../component/Header"
-import Footer from "../../component/Footer"
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -41,7 +39,6 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
       <div className="flex-1 flex items-center justify-center py-12 px-4">
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">Register</h2>
@@ -115,7 +112,6 @@ export default function RegisterPage() {
           </p>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

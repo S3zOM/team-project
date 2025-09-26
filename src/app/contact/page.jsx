@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import Header from "../../component/Header";
-import Footer from "../../component/Footer";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -46,7 +44,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">
         <h1 className="text-4xl font-bold text-blue-600 mb-4">Contact Us</h1>
         <p className="max-w-2xl text-lg text-gray-700 text-center mb-6">
@@ -110,7 +107,6 @@ export default function ContactPage() {
           </button>
         </form>
       </main>
-      <Footer />
     </div>
   );
 }

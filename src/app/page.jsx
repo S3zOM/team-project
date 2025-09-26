@@ -1,9 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import SearchBar from "@/component/SearchBar";
-import Footer from "@/component/Footer";
-import Header from "@/component/Header";
 import Hero from "@/component/Hero";
 import JobCard from "@/component/JobCard";
 import JobCategories from "@/component/JobCategories";
@@ -118,53 +115,46 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center">
-      <Header />
-      <div className="w-full flex flex-col items-center">
-        <div className="w-full flex justify-end max-w-6xl mt-6 pr-4">
-          <SearchBar onSearch={setSearch} />
-        </div>
+      <div className="w-full max-w-6xl mx-auto px-4 flex flex-col items-center">
+        {/* SearchBar removed, now only in header */}
         <Hero />
-      </div>
-
-      {/* Job Categories */}
-      <JobCategories selected={selectedCategory} onSelect={setSelectedCategory} />
-
-      {/* Job Seekers List */}
-      <section className="mt-12 w-full max-w-6xl">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-2xl font-bold text-gray-700">
-            {selectedCategory ? `${selectedCategory} Job Seekers` : "Featured Job Seekers"}
-          </h3>
-          {selectedCategory && (
-            <button
-              className="text-blue-600 hover:underline text-sm font-medium"
-              onClick={() => setSelectedCategory(null)}
-            >
-              Clear Filter
-            </button>
+        {/* Job Categories */}
+        <div className="mt-8 w-full flex justify-center">
+          <JobCategories selected={selectedCategory} onSelect={setSelectedCategory} />
+        </div>
+        {/* Job Seekers List */}
+        <section className="mt-12 w-full flex flex-col items-center">
+          <div className="flex flex-col items-center mb-6 w-full">
+            <h3 className="text-2xl font-bold text-gray-700 text-center">
+              {selectedCategory ? `${selectedCategory} Job Seekers` : "Featured Job Seekers"}
+            </h3>
+            {selectedCategory && (
+              <button
+                className="text-blue-600 hover:underline text-sm font-medium mt-2"
+                onClick={() => setSelectedCategory(null)}
+              >
+                Clear Filter
+              </button>
+            )}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full justify-items-center">
+            {filteredJobSeekers.map((js) => (
+              <JobCard
+                key={js.id}
+                name={js.name}
+                title={js.title}
+                description={js.description}
+                isFavorite={favorites.includes(js.id)}
+                onFavorite={() => handleFavorite(js.id)}
+                onClick={() => { setSelectedJob(js); setModalOpen(true); }}
+              />
+            ))}
+          </div>
+          {filteredJobSeekers.length === 0 && (
+            <div className="text-center text-gray-500 py-12">No job seekers found in this category.</div>
           )}
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {filteredJobSeekers.map((js) => (
-            <JobCard
-              key={js.id}
-              name={js.name}
-              title={js.title}
-              description={js.description}
-              isFavorite={favorites.includes(js.id)} // ✅ added
-              onFavorite={() => handleFavorite(js.id)} // ✅ added
-              onClick={() => { setSelectedJob(js); setModalOpen(true); }} // ✅ open modal
-            />
-          ))}
-        </div>
-        {filteredJobSeekers.length === 0 && (
-          <div className="text-center text-gray-500 py-12">No job seekers found in this category.</div>
-        )}
-      </section>
-
-      <Footer />
-
-      {/* ✅ NEW: Render Modal */}
+        </section>
+      </div>
       <JobModal 
         job={selectedJob} 
         open={modalOpen} 
