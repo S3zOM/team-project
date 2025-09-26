@@ -3,7 +3,7 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 export default function JobCard({ name, title, description, isFavorite, onFavorite, onClick, favoriteDisabled }) {
   favoriteDisabled = favoriteDisabled || false;
   return (
-  <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center relative">
+  <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center relative">
       <div className="w-20 h-20 bg-gray-200 rounded-full mb-4" />
       <h4 className="text-lg font-semibold">{name}</h4>
       <p className="text-gray-500 text-sm mb-2">{title}</p>
