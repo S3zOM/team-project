@@ -7,8 +7,9 @@ import { createContext, useContext, useState, useEffect } from "react"
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [hasRegisteredUser, setHasRegisteredUser] = useState(false)
+  const [user, setUser] = useState(null);
+  const [hasRegisteredUser, setHasRegisteredUser] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // check if user is logged in
@@ -22,6 +23,8 @@ export const AuthProvider = ({ children }) => {
       } else {
         setUser({ email: loggedInUser });
       }
+    } else {
+      setUser(null);
     }
 
     // check if any registered user exists
@@ -29,6 +32,7 @@ export const AuthProvider = ({ children }) => {
       key.startsWith("registeredUser-")
     );
     setHasRegisteredUser(hasUser);
+    setLoading(false);
   }, []);
 
   const register = (newUser) => {
@@ -94,12 +98,15 @@ export const AuthProvider = ({ children }) => {
     setUser(null)
   }
 
+  if (loading) {
+    return <div className="w-full min-h-screen flex items-center justify-center text-blue-600 text-xl">Loading...</div>;
+  }
   return (
     <AuthContext.Provider
       value={{ user, hasRegisteredUser, register, login, logout }}>
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 export const useAuth = () => useContext(AuthContext)
